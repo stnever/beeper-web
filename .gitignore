@@ -36,4 +36,4 @@ public/bundle.js
 *.sql/
 *.mongodmp
 
-dist
+dist/build.js.map
