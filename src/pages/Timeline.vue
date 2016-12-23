@@ -1,7 +1,10 @@
 <template>
   <div class="row" style="padding-top: 15px;">
     <div class="col-md-3 sidebar">
-      <timeline-sidebar :cloud="cloud" :current-query="currentQuery"></timeline-sidebar>
+      <timeline-sidebar
+        v-on:reload="fetchData"
+        :cloud="cloud"
+        :current-query="currentQuery"></timeline-sidebar>
     </div>
     <div class="col-md-9">
       <beeps-list :beeps="beeps"></beeps-list>

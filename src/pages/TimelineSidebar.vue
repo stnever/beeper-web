@@ -1,7 +1,14 @@
 <template>
   <div class="well timeline-sidebar">
 
-    <h2>Current Filter</h2>
+    <h2>
+      Current Filter
+
+      <button @click="$emit('reload')">
+        <span class="fa fa-refresh"></span>
+      </button>
+    </h2>
+    
     <crit-list v-on:removeCrit="removeCrit" :current-query="currentQuery"></crit-list>
 
     <h2>Tag Cloud</h2>
@@ -52,6 +59,7 @@ export default {
   text-transform: uppercase;
   color: #aaa;
   margin: 30px 0 10px 0;
+  line-height: 28px;
 }
 
 .timeline-sidebar > h2:first-of-type {
@@ -93,4 +101,18 @@ export default {
 .filter-item.tag .filter-label {  color: lightgreen;}
 .filter-item.all .filter-label {   color: white;}
 
+.timeline-sidebar h2 button {
+  border-width: 0;
+  float: right;
+  height: 28px;
+  width: 28px;
+  border-radius: 100px;
+  transition: all .3s ease;
+  background-color: transparent;
+  color: #333;
+}
+
+.timeline-sidebar h2 button:hover,
+.timeline-sidebar h2 button:active,
+.timeline-sidebar h2 button:focus { background-color: #ccc; }
 </style>
