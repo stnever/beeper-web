@@ -86,10 +86,6 @@
     <div class="form-group">
       <button class="btn btn-primary btn-lg" @click="save">Save changes</button>
 
-      <button @click="$refs.toaster.start()">Start</button>
-      <button @click="$refs.toaster.hide()">Hide</button>
-      <button @click="$refs.toaster.success('This is a message')">Success</button>
-
       <button class="btn btn-danger btn-lg pull-right"
         ng-if="!isCreate" ng-click="confirmDelete()">Delete</button>
     </div>

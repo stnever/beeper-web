@@ -8,11 +8,11 @@
         <span class="fa fa-refresh"></span>
       </button>
     </h2>
-    
+
     <crit-list v-on:removeCrit="removeCrit" :current-query="currentQuery"></crit-list>
 
-    <h2>Tag Cloud</h2>
-    <tag-cloud v-on:addCrit="addCrit" :cloud="cloud" :current-query="currentQuery"></tag-cloud>
+    <h2>Tag Cloud (last 30 days)</h2>
+    <tag-cloud v-on:addCrit="addCrit" :cloud="cloud"></tag-cloud>
 
   </div>
 </template>
@@ -20,13 +20,7 @@
 <script>
 import CritList from './CritList.vue'
 import TagCloud from './TagCloud.vue'
-import omitEmpty from 'omit-empty'
-
-function rebuildQuery(q) {
-  q = omitEmpty(_.mapValues(q, v => _.isArray(v) ? v.join(',') : v))
-  console.log('rebuilt query', JSON.stringify(q))
-  return q
-}
+import {rebuildQuery} from '../utils'
 
 export default {
   components: {CritList, TagCloud},

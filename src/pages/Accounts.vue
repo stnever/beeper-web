@@ -6,7 +6,7 @@
     <div class="list-group">
 
       <div class="list-group-item" v-for="a in filteredAccounts">
-        <div class="media">          
+        <div class="media">
           <div class="media-body">
 
             <div class="col-md-6">
@@ -26,13 +26,15 @@
 
             <ul class="col-md-6" v-else>
               <li class="sub" v-for="s in a.subscriptions">
-                <span v-if="s.email" class="fa fa-fw fa-envelope"></span>
-                <span v-if="s.sms"   class="fa fa-fw fa-mobile  "></span>
-                <span v-if="s.inbox" class="fa fa-fw fa-inbox   "></span>
-                <sub-crit prefix="sources" :value="s.criteria.sources"></sub-crit>
-                <sub-crit prefix="without sources" :value="s.criteria.withoutSources"></sub-crit>
-                <sub-crit prefix="tags" :value="s.criteria.tags"></sub-crit>
-                <sub-crit prefix="without tags" :value="s.criteria.withoutTags"></sub-crit>
+                <div class="notif-types">
+                  <span :class="`fa fa-fw ${firstIcon(s)}`"></span>
+                </div>
+                <div class="notif-crits">
+                  <sub-crit prefix="sources" :value="s.criteria.sources"></sub-crit>
+                  <sub-crit prefix="without sources" :value="s.criteria.withoutSources"></sub-crit>
+                  <sub-crit prefix="tags" :value="s.criteria.tags"></sub-crit>
+                  <sub-crit prefix="without tags" :value="s.criteria.withoutTags"></sub-crit>
+                </div>
               </li>
             </ul>
 
@@ -49,7 +51,7 @@ import {Account} from '../models'
 
 const SubCrit = {
   template: `
-    <span v-if="isPresent">{{prefix}}: {{value.join(', ')}}</span>`,
+    <span v-if="isPresent">{{prefix}}: <b>{{value.join(', ')}}</b></span>`,
   props: ['prefix', 'value'],
   computed: {
     isPresent() { console.log(this.value) ; return this.value != null && this.value.length > 0 }
@@ -77,6 +79,14 @@ export default {
     Account.findAll().then( data => {
       this.accounts = data.rows
     })
+  },
+  methods: {
+    firstIcon(sub) {
+      if ( sub.email ) return 'fa-envelope'
+      if ( sub.sms   ) return 'fa-mobile'
+      if ( sub.inbox ) return 'fa-inbox'
+      return ''
+    }
   }
 }
 </script>
@@ -85,13 +95,28 @@ export default {
 .accounts-list > .form-control { margin: 15px 0; }
 
 .accounts-list .sub {
-  border-radius: 3px;
-  background-color: #eee;
-  padding: 1px 3px;
+  margin-bottom: 2px;
   list-style-type: none;
 }
 
 .accounts-list .sub .fa {
   color: #39e939;
 }
+
+.accounts-list .notif-crits {
+  display: table-cell;
+  background-color: #eee;
+  border-radius: 2px;
+  padding: 2px 8px;
+}
+
+.accounts-list .notif-types {
+  display: table-cell;
+  white-space: nowrap;
+  width: 24px;
+}
+
+.accounts-list .notif-crits span { color: #666; }
+.accounts-list .notif-crits span b { color: #000; }
+.accounts-list .notif-crits span:not(:last-of-type) { margin-right: 10px; }
 </style>

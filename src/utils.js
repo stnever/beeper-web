@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import moment from 'moment'
+import omitEmpty from 'omit-empty'
 
 export function isSame(a, b) {
   return moment(a).utcOffset('-03:00')
@@ -26,4 +27,9 @@ export function s2a(s) {
   if ( _.isArray(s) ) return s
   if ( s.trim().length < 1 ) return null
   return s.split(',').map( p => p.trim() )
+}
+
+export function rebuildQuery(q) {
+  q = omitEmpty(_.mapValues(q, v => _.isArray(v) ? v.join(',') : v))
+  return q
 }

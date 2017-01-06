@@ -10,6 +10,7 @@ import FormGroup from './components/FormGroup.vue'
 Vue.component('FormGroup', FormGroup)
 
 Vue.component('Toggle', require('./components/Toggle.vue'))
+Vue.component('Pager', require('./components/Pager.vue'))
 
 import App from './App.vue'
 import routes from './pages'

@@ -17,7 +17,7 @@
           <div class="media">
             <div class="media-body">
               <h4 class="list-group-item-heading">
-                <router-link :to="`/sources/${b.source}`">{{b.source}}</router-link>
+                <router-link :to="`/timeline?sources=${b.source}`">{{b.source}}</router-link>
 
                 <span class="beep-timestamp">
                 {{ b.timestamp | fmtTime }}

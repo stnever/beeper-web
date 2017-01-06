@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import {dropdown, navbar} from 'vue-strap'
 import {Source} from './models'
 
@@ -46,7 +47,7 @@ export default {
   },
   created() {
     Source.findAll().then( (rows) => {
-      this.sources = rows
+      this.sources = _.sortBy(rows, 'name')
     })
   },
   methods: {

@@ -39,7 +39,7 @@ function breakQuery(q) {
 export default {
   props: ['currentQuery'],
   computed: {
-    critItems() { var r = breakQuery(this.currentQuery) ; console.log(r) ; return r }
+    critItems() { var r = breakQuery(this.currentQuery) ; return r }
   }
 }
 </script>
